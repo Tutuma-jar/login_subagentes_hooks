@@ -33,3 +33,19 @@ la contraseña se almacena como un hash PBKDF2 con sal aleatoria.
 
 La API usa `POST /api/login`, `GET /api/me` y `POST /api/logout` desde el mismo
 origen. La sesión viaja en una cookie HttpOnly con SameSite=Strict.
+
+## Pruebas
+
+Desde la carpeta del proyecto:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+La suite contiene cinco pruebas: tres deben pasar y dos fallan intencionalmente
+con expectativas incorrectas para demostrar un resultado fallido. Sus nombres
+empiezan con `test_fallo_intencional_`. El resultado esperado es
+`FAILED (failures=2)` y el comando termina con código de salida 1.
+
+Las pruebas usan una base de datos temporal y un puerto local disponible;
+no modifican `database/login.sqlite3`.

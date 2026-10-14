@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio de sesión · Demo</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="card" id="session-card" aria-busy="true">
+      <p class="eyebrow">Proyecto de demostración</p>
+      <h1>Tu espacio</h1>
+      <p id="status" class="status" role="status" aria-live="polite">Comprobando tu sesión…</p>
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <section id="login-view" aria-labelledby="login-title" hidden>
+        <h2 id="login-title">Inicia sesión</h2>
+        <p class="intro">Introduce tus credenciales para acceder.</p>
+        <form id="login-form">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+          <label for="password">Contraseña</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <button id="login-button" type="submit">Iniciar sesión</button>
+        </form>
+        <aside class="demo" aria-label="Credenciales de demostración">
+          <strong>Prueba la demo</strong>
+          <p>Correo: <code>demo@example.com</code></p>
+          <p>Contraseña: <code>Demo1234!</code></p>
+        </aside>
+      </section>
+
+      <section id="user-view" aria-labelledby="welcome-title" hidden>
+        <h2 id="welcome-title" tabindex="-1">Bienvenido</h2>
+        <p class="intro">Has iniciado sesión correctamente.</p>
+        <p id="user-email" class="user-email"></p>
+        <button id="logout-button" type="button">Cerrar sesión</button>
+      </section>
+      <noscript><p class="error">Activa JavaScript para utilizar el inicio de sesión.</p></noscript>
+    </main>
+  </body>
+</html>

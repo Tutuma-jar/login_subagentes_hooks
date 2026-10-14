@@ -1,4 +1,4 @@
-"""Cinco pruebas HTTP: tres correctas y dos fallos intencionales."""
+"""Cinco pruebas HTTP del login y de la sesión."""
 
 import http.client
 from http.cookies import SimpleCookie
@@ -122,21 +122,15 @@ class LoginTests(unittest.TestCase):
         self.assertEqual(status, 401)
         self.assertFalse(server.SESSIONS)
 
-    def test_fallo_intencional_password_incorrecta_aceptada(self):
-        """Fallo intencional: el contrato correcto devuelve 401, no 200."""
+    def test_password_incorrecta_devuelve_401(self):
+        """Una contraseña incorrecta debe devolver 401."""
         status, _, _ = self.login(password="incorrecta")
-        self.assertEqual(
-            status, 200,
-            "FALLO INTENCIONAL: contraseña incorrecta debe devolver 401.",
-        )
+        self.assertEqual(status, 401)
 
-    def test_fallo_intencional_me_sin_cookie_autorizado(self):
-        """Fallo intencional: sin cookie corresponde 401, no 200."""
+    def test_me_sin_cookie_devuelve_401(self):
+        """Consultar /api/me sin sesión debe devolver 401."""
         status, _, _ = self.request("GET", "/api/me")
-        self.assertEqual(
-            status, 200,
-            "FALLO INTENCIONAL: /api/me sin sesión debe devolver 401.",
-        )
+        self.assertEqual(status, 401)
 
 
 if __name__ == "__main__":

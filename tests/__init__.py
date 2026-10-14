@@ -1,1 +1,1 @@
-"""Pruebas del login, incluidas dos demostraciones de fallo intencional."""
+"""Pruebas del login y del ciclo de sesión."""

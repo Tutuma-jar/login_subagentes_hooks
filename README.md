@@ -42,10 +42,10 @@ Desde la carpeta del proyecto:
 python -m unittest discover -s tests -v
 ```
 
-La suite contiene cinco pruebas: tres deben pasar y dos fallan intencionalmente
-con expectativas incorrectas para demostrar un resultado fallido. Sus nombres
-empiezan con `test_fallo_intencional_`. El resultado esperado es
-`FAILED (failures=2)` y el comando termina con código de salida 1.
+La suite contiene cinco pruebas del login y la sesión. Las dos expectativas
+intencionalmente incorrectas se corrigieron: una contraseña incorrecta y una
+consulta a `/api/me` sin sesión deben devolver `401`. El resultado esperado
+es cinco pruebas aprobadas (`OK`).
 
 Las pruebas usan una base de datos temporal y un puerto local disponible;
 no modifican `database/login.sqlite3`.
@@ -58,5 +58,31 @@ También puedes iniciarlo manualmente desde **Actions → Tests del login → Ru
 
 Consulta las ejecuciones en
 [Actions del repositorio](https://github.com/Tutuma-jar/login_subagentes_hooks/actions).
-La ejecución aparece como fallida porque conserva los dos fallos intencionales.
-En el paso de unittest se muestran las tres pruebas aprobadas y las dos fallidas.
+En el paso de unittest se muestran los resultados de las cinco pruebas.
+
+## Hook de Git
+
+Activa el hook local en cada clon del repositorio:
+
+```powershell
+git config --local core.hooksPath .githooks
+```
+
+Antes de cada commit, el hook `pre-commit` comprueba que los archivos del
+proyecto estén agregados y ejecuta los tests. Si reaparecen los dos bloques
+originales de fallo intencional, corrige sus expectativas de `200` a `401`,
+renombra los tests y detiene el commit para revisar la corrección:
+
+```powershell
+git diff
+git add tests/test_login.py
+git commit -m "Corrige las expectativas del login"
+```
+
+Otros fallos bloquean el commit y requieren una corrección manual. El hook
+no modifica el backend ni agrega archivos automáticamente. Puedes ejecutar
+la corrección y los tests sin hacer un commit:
+
+```powershell
+python scripts/fix_login_tests.py
+```

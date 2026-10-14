@@ -25,5 +25,5 @@ jobs:
         with:
           python-version: '3.14'
 
-      - name: Ejecutar unittest (incluye 2 fallos intencionales)
+      - name: Ejecutar las 5 pruebas de unittest
         run: python -m unittest discover -s tests -v

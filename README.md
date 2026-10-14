@@ -49,3 +49,14 @@ empiezan con `test_fallo_intencional_`. El resultado esperado es
 
 Las pruebas usan una base de datos temporal y un puerto local disponible;
 no modifican `database/login.sqlite3`.
+
+## GitHub Actions
+
+El workflow `.github/workflows/login-tests.yml` ejecuta las cinco pruebas en
+Python 3.14 al subir cambios a `main` o abrir un pull request hacia esa rama.
+También puedes iniciarlo manualmente desde **Actions → Tests del login → Run workflow**.
+
+Consulta las ejecuciones en
+[Actions del repositorio](https://github.com/Tutuma-jar/login_subagentes_hooks/actions).
+La ejecución aparece como fallida porque conserva los dos fallos intencionales.
+En el paso de unittest se muestran las tres pruebas aprobadas y las dos fallidas.

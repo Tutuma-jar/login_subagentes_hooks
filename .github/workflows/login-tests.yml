@@ -1,0 +1,29 @@
+name: Tests del login
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Ejecutar las 5 pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Descargar el proyecto
+        uses: actions/checkout@v7
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+
+      - name: Ejecutar unittest (incluye 2 fallos intencionales)
+        run: python -m unittest discover -s tests -v
